@@ -5,9 +5,17 @@ import random
 from discord import Game
 from discord.ext import commands
 from math import floor
+from random import randrange
 
 client = discord.Client()
 client = commands.Bot(command_prefix = '.', case_insensitive=True)
+
+@client.command(name='random',
+				aliases=['r', 'rand'])
+async def random(ctx, nb: int):
+	tirage = randrange(1, nb+1)
+	await ctx.send(f'Nombre tirer: {tirage}')
+
 
 @client.command()
 async def draft(ctx, nb: int=9, * args):
@@ -35,7 +43,7 @@ async def draft(ctx, nb: int=9, * args):
 		txt += '\n'
 	await ctx.send(txt)
 
-client.run('xxx')
+client.run('')
 
 #
 #'Frédéric Barberousse', 'Theodore Roosevelt', 'Victoria', 'Saladin', 'Pierre II', 'Qin Shi Huang',
