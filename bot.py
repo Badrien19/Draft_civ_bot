@@ -12,7 +12,7 @@ client = commands.Bot(command_prefix = '.', case_insensitive=True)
 
 @client.command(name='random',
 				aliases=['r', 'rand'])
-async def random(ctx, nb: int):
+async def rand(ctx, nb: int):
 	tirage = randrange(1, nb+1)
 	await ctx.send(f'Nombre tirer: {tirage}')
 
@@ -43,7 +43,7 @@ async def draft(ctx, nb: int=9, * args):
 		txt += '\n'
 	await ctx.send(txt)
 
-client.run('')
+client.run('xxxxxx')
 
 #
 #'Frédéric Barberousse', 'Theodore Roosevelt', 'Victoria', 'Saladin', 'Pierre II', 'Qin Shi Huang',
