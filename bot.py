@@ -1,33 +1,52 @@
+# -*-coding:Latin-1 -*
 # bot.py
 import discord
 import random
 from discord import Game
 from discord.ext import commands
+from math import floor
 
 client = discord.Client()
 client = commands.Bot(command_prefix = '.', case_insensitive=True)
 
-l_civilisation = [
-		'Fr√©d√©ric Barberousse', 'Theodore Roosevelt', 'Victoria', 'Saladin', 'Pierre II', 'Qin Shi Huang',
-		'Alphonse Ier du Kongo','Cl√©op√¢tre', 'Philippe II', 'Catherine de M√©dicis', 'P√©ricl√®s', 'Gorg√¥', 'Gandhi',
-		'H≈çj≈ç Tokimune', 'Harald Hardrada', 'Trajan', 'Pierre Ier le Grand', 'Tomyris','Gilgamesh', 'Moctezuma Ier',
-		# dlc
-		'Hedwige', 'Alexandre le grand','Cyrus II', 'Dyah Gitarja','Jayavrman','John Curtin', 'Aminator√©',
-		# gathering storm
-		'Wilfrid Laurier', 'Kupe', 'Mansa Moussa', 'Matthias Corvinus', 'Pachacuti',
-		# Rise and fall
-		'Seondeok', 'Wilhelmine', 'Gengis Khan', 'Tamar', 'Chandgragupta', 'Poundmaker', 'Toqui', 'Robert the Bruce', 'Shaka',
+@client.command()
+async def draft(ctx, nb: int=9, * args):
+	l_civilisation = [
+		'PhÈnicien', 'Allemagne', 'Canada', 'PericlËs', 'Chine', 'AmÈrique', 'BrÈsil', 'GÈorgie', 'Inca', 'IndonÈsie',
+		'Chandragupta', 'Nubie', 'Ottoman', 'Khmer', 'Mali', 'Australie', 'MacÈdoine', 'France', 'France-ElÈonore',
+		'Scythie', 'Pologne', 'Perse', 'Japon', 'Mapuche', 'Arabie', 'Sumer', 'Angleterre-ElÈonore', 'Egypte',
+		'Russie',
+		'Hongrie', 'Cree', 'Ecosse', 'Angleterre', 'Espagne', 'Gorgo', 'NorvËge', 'Mongolie', 'Gandhi', 'SuËde',
+		'Zoulou',
 	]
-	# 41 civ
-@client.command(name = 'civ',
-				aliases=['civilization', 'civilisation', 'civ6'])
-async def draft(ctx):
+	for ban in args:
+		l_civilisation.remove(ban)
+		print(f'ban {ban}')
 	random.shuffle(l_civilisation)
-	i = 0
-	a = 0
-	for a in 9
-		await ctx.send(f'Joueur {i}: {l_civilisation[i]}, {l_civilisation[i+1]}, {l_civilisation[i+2]}, {l_civilisation[i+3]}')
-		i += 4
-		a += 1
+	civ_per_player = int(floor(len(l_civilisation)/nb))
+	print(civ_per_player)
+	txt = f'Invocation de la draft;\n'
+	for i in range(0,nb):
+		txt += f":19: Draft {i+1}: "
+		for x in range(0, civ_per_player):
+			txt += f'{l_civilisation.pop()}'
+			if x != civ_per_player-1:
+				txt += ', '
+		txt += '\n'
+	await ctx.send(txt)
 
-client.run('NjUxNTQ4MjY4MDMwODUzMTY0.XfDlrg.25e2eN4nrsGSXInxjeOWWlKVW-w')
+client.run('xxx')
+
+#
+#'FrÈdÈric Barberousse', 'Theodore Roosevelt', 'Victoria', 'Saladin', 'Pierre II', 'Qin Shi Huang',
+#'Alphonse Ier du Kongo', 'ClÈop‚tre', 'Philippe II', 'Catherine de MÈdicis', 'PÈriclËs', 'GorgÙ', 'Gandhi',
+#'Houjou Tokimune', 'Harald Hardrada', 'Trajan', 'Pierre Ier le Grand', 'Tomyris', 'Gilgamesh', 'Moctezuma Ier',
+#'AmanitorÈ',
+## dlc
+#'Hedwige', 'Alexandre le grand', 'Cyrus II', 'Dyah Gitarja', 'Jayavrman', 'John Curtin', 'AminatorÈ',
+## gathering storm
+#'Wilfrid Laurier', 'Kupe', 'Mansa Moussa', 'Matthias Corvinus', 'Pachacuti', 'Eleanor of Aquitaine',
+#"AliÈnor d'Aquitaine", 'Lautaro', 'Dido',
+## Rise and fall
+#'Seondeok', 'Wilhelmine', 'Gengis Khan', 'Tamar', 'Chandgragupta', 'Poundmaker', 'Toqui', 'Robert the Bruce',
+#'Shaka',
